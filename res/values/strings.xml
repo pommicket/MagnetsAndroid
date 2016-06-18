@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Magnets</string>
+    <string name="menu_title">Main menu</string>
+    <string name="play_button_text">Play</string>
+</resources>
