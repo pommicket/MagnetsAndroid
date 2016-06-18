@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,10 +24,10 @@ public class CanvasView extends View
     public static int score = -1;
     public static boolean playing = false;
 
-    final public Handler handler = new Handler();
-    final private CreateMagnet createMagnet = new CreateMagnet();
+    public Handler handler = new Handler();
+    private CreateMagnet createMagnet = new CreateMagnet();
 
-    final private MoveMagnets moveMagnets = new MoveMagnets();
+    private MoveMagnets moveMagnets = new MoveMagnets();
 
     public double dist(double x1, double y1, double x2, double y2)
     {
@@ -37,26 +38,23 @@ public class CanvasView extends View
     }
 
 
-    private void onInit()
+    public void onInit()
     {
+        createMagnet = new CreateMagnet();
+        moveMagnets = new MoveMagnets();
+        handler = new Handler();
+
+
+
+        magnetLocations = new ArrayList<>(0);
 
         createMagnet.cv = this;
         moveMagnets.cv = this;
 
-        w = getWidth();
-        h = getHeight();
-
-        greenRingSize = w/2;
-
-        playerLocation = new double[2];
-        playerLocation[0] = w/2;
-        playerLocation[1] = h/2;
-
-
 
 
         handler.postDelayed(createMagnet, 1000);
-        handler.postDelayed(moveMagnets, 1000);
+        handler.postDelayed(moveMagnets, 1011);
 
         invalidate();
     }
@@ -92,8 +90,11 @@ public class CanvasView extends View
         super.onWindowFocusChanged(hasFocus);
         w = getWidth();
         h = getHeight();
-        onInit();
-
+        playerLocation = new double[2];
+        playerLocation[0] = w/2;
+        playerLocation[1] = h/2;
+        greenRingSize = w/2;
+        invalidate();
     }
 
     public CanvasView(Context context, AttributeSet attrs, int defStyle)
@@ -116,12 +117,14 @@ public class CanvasView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
+
+
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setARGB(255, 0, 0, 255);
-        canvas.drawCircle((float) playerLocation[0], (float) playerLocation[1], 10, paint);
+        canvas.drawCircle((float) playerLocation[0], (float) playerLocation[1], 0.005f*w, paint);
         paint.setARGB(25, 0, 0, 255);
-        canvas.drawCircle((float)playerLocation[0], (float)playerLocation[1], 200, paint);
+        canvas.drawCircle((float)playerLocation[0], (float)playerLocation[1], 0.1f*w, paint);
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
@@ -132,11 +135,13 @@ public class CanvasView extends View
 
         for (double[] location : magnetLocations) {
             paint.setARGB(255, 255, 0, 0);
-            canvas.drawCircle((int) location[0], (int) location[1], 10, paint);
+            canvas.drawCircle((float) location[0], (float) location[1], 0.005f*w, paint);
             paint.setARGB(25, 255, 0, 0);
-            canvas.drawCircle((int)location[0], (int)location[1], 200, paint);
+            canvas.drawCircle((float)location[0], (float)location[1], 0.1f*w, paint);
         }
 
+        TextView tv = (TextView) game.findViewById(R.id.score);
+        tv.setText("Score: " + magnetLocations.size());
 
     }
 

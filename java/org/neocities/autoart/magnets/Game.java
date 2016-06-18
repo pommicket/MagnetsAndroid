@@ -21,4 +21,12 @@ public class Game extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        CanvasView cv = (CanvasView) findViewById(R.id.canvas);
+        cv.onInit();
+    }
 }
