@@ -120,6 +120,9 @@ public class CanvasView extends View
         paint.setStyle(Paint.Style.FILL);
         paint.setARGB(255, 0, 0, 255);
         canvas.drawCircle((float) playerLocation[0], (float) playerLocation[1], 10, paint);
+        paint.setARGB(25, 0, 0, 255);
+        canvas.drawCircle((float)playerLocation[0], (float)playerLocation[1], 200, paint);
+
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
         paint.setARGB(255, 0, 255, 0);
@@ -127,8 +130,7 @@ public class CanvasView extends View
 
         paint.setStyle(Paint.Style.FILL);
 
-        for (double[] location: magnetLocations)
-        {
+        for (double[] location : magnetLocations) {
             paint.setARGB(255, 255, 0, 0);
             canvas.drawCircle((int) location[0], (int) location[1], 10, paint);
             paint.setARGB(25, 255, 0, 0);
