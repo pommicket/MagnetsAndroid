@@ -26,8 +26,8 @@ public class MoveMagnets implements Runnable
                 if (d == 0)
                     return;
                 double r = Math.sqrt((pos[0] - cv.playerLocation[0]) * (pos[0] - cv.playerLocation[0]) + (pos[1] - cv.playerLocation[1]) * (pos[1] - cv.playerLocation[1]));
-                pos[0] -= 1000.0*(pos[0]-cv.playerLocation[0])/(r*d);
-                pos[1] -= 1000.0*(pos[1]-cv.playerLocation[1])/(r*d);
+                pos[0] -= cv.w/1.5*(pos[0]-cv.playerLocation[0])/(r*d);
+                pos[1] -= cv.w/1.5*(pos[1]-cv.playerLocation[1])/(r*d);
                 cv.magnetLocations.set(i, pos);
                 if (cv.dist(pos[0], pos[1], cv.playerLocation[0], cv.playerLocation[1]) < 10)
                 {
