@@ -1,2 +1,2 @@
 # MagnetsAndroid
-The Android app for http://autoart.neocities.org/magnets.html
+The Android app for https://pommicket.com/pommicket/magnets.html
